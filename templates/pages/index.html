@@ -5,15 +5,16 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>FlexStart Bootstrap Template - Index</title>
+  <title>Inicio - Universidad del Magdalena</title>
   <meta content="" name="description">
 
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{ url_for('static', filename='index/') }}assets/img/favicon.png" rel="icon">
-  <link href="{{ url_for('static', filename='index/') }}assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
+  <!-- <link href="{{ url_for('static', filename='index/') }}assets/img/favicon.png" rel="icon"> -->
+  <!-- <link href="{{ url_for('static', filename='index/') }}assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
+    <link rel="shortcut icon" href="https://cdn.unimagdalena.edu.co/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://cdn.unimagdalena.edu.co/images/favicon.ico" type="image/x-icon">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -36,7 +37,7 @@
   <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="#" class="logo d-flex align-items-center">
         <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Feventos.unimagdalena.edu.co%2FContent%2FImagenes%2Fpatrocinadores%2Fp20190320164716.744.jpg&f=1&nofb=1&ipt=465de5c89fa719b4054c1aad8718a37eba616370d30db4b7e439197bcc3e57b5&ipo=images" alt="">
         <span>Universidad del Magdalena</span>
       </a>
@@ -47,7 +48,7 @@
           <li><a class="nav-link scrollto" href="#about">Acerca de</a></li>
           <li><a class="nav-link scrollto" href="#team">Equipo</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contactos</a></li>
-          <li><a class="getstarted scrollto" href="#about">Ingresar</a></li>
+          <li><a class="getstarted scrollto" href="{{ url_for('home_bp.login') }}">Ingresar</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
