@@ -4,15 +4,28 @@ from playhouse.postgres_ext import ArrayField
 from playhouse.flask_utils import FlaskDB
 from uuid  import uuid4
 from datetime import datetime
+from flask_login import UserMixin
+from enum import auto
+from strenum import StrEnum
 
 db = FlaskDB()
 
-class Usuario(db.Model):
+class Usuario(db.Model, UserMixin):
+    class ROLES(StrEnum):
+        ADMINISTRADOR = auto()
+        USUARIO = auto()
+
     id = UUIDField(primary_key=True, default=uuid4)
-    identificacion = CharField(max_length=20)
+    identificacion = CharField(max_length=20, unique=True)
     nombre = CharField()
-    direccion = CharField()
-    telefono = IntegerField()
+    correo = CharField(unique=True)
+    contraseña = CharField()
+    direccion = CharField(null=True)
+    telefono = IntegerField(null=True)
+    rol = CharField(
+        default=ROLES.USUARIO.value,
+        choices=[(r.name, r.value) for r in ROLES]
+    )
 
 class Producto(db.Model):
     codigo = CharField(max_length=8)

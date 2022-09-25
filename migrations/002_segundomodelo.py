@@ -37,14 +37,10 @@ SQL = pw.SQL
 def migrate(migrator: Migrator, database, fake=False, **kwargs):
     """Write your migrations here."""
 
-    migrator.remove_fields('pedido', 'precio', 'nombre')
+    migrator.drop_not_null('usuario', 'direccion')
 
 
 def rollback(migrator: Migrator, database, fake=False, **kwargs):
     """Write your rollback migrations here."""
 
-    migrator.add_fields(
-        'pedido',
-
-        precio=pw.IntegerField(),
-        nombre=pw.CharField(max_length=20))
+    migrator.add_not_null('usuario', 'direccion')

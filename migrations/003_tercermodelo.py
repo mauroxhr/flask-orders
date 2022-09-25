@@ -1,4 +1,4 @@
-"""Peewee migrations -- 001_primermodelo.py.
+"""Peewee migrations -- 003_tercermodelo.py.
 
 Some examples (model - class or model name)::
 
@@ -37,47 +37,10 @@ SQL = pw.SQL
 def migrate(migrator: Migrator, database, fake=False, **kwargs):
     """Write your migrations here."""
 
-    @migrator.create_model
-    class Usuario(pw.Model):
-        id = pw.UUIDField(primary_key=True)
-        identificacion = pw.CharField(max_length=20)
-        nombre = pw.CharField(max_length=255)
-        correo = pw.CharField(max_length=255, unique=True)
-        contraseña = pw.CharField(max_length=255)
-        direccion = pw.CharField(max_length=255)
-        telefono = pw.IntegerField()
-        rol = pw.CharField(constraints=[SQL("DEFAULT 'USUARIO'")], default='USUARIO', max_length=255)
-
-        class Meta:
-            table_name = "usuario"
-
-    @migrator.create_model
-    class Producto(pw.Model):
-        id = pw.AutoField()
-        codigo = pw.CharField(max_length=8)
-        nombre = pw.CharField(max_length=20)
-        precio = pw.IntegerField()
-
-        class Meta:
-            table_name = "producto"
-
-    @migrator.create_model
-    class Pedido(pw.Model):
-        orden_id = pw.UUIDField(primary_key=True)
-        cliente = pw.ForeignKeyField(backref='usuario_pedido', column_name='cliente_id', field='id', model=migrator.orm['usuario'])
-        producto = pw.ForeignKeyField(backref='producto_pedido', column_name='producto_id', field='id', model=migrator.orm['producto'])
-        cantidad = pw.IntegerField()
-
-        class Meta:
-            table_name = "pedido"
-
+    migrator.drop_not_null('usuario', 'telefono')
 
 
 def rollback(migrator: Migrator, database, fake=False, **kwargs):
     """Write your rollback migrations here."""
 
-    migrator.remove_model('pedido')
-
-    migrator.remove_model('producto')
-
-    migrator.remove_model('usuario')
+    migrator.add_not_null('usuario', 'telefono')

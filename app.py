@@ -1,6 +1,8 @@
 from flask import Flask
-from models import db
+from flask_login import LoginManager
+from models import db, Usuario
 from views.home import home
+from views.user import user
 
 
 # Config
@@ -10,8 +12,21 @@ app.config["SECRET_KEY"] = "asmduianwdias dapdwaokd apd adao"
 db.init_app(app)
 
 
+#Login manager
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def user_loader(user_id):
+    try:
+        user = Usuario.get(Usuario.id == user_id)
+        return user
+    except:
+        return
+
 # Blueprints
 app.register_blueprint(home, url_prefix="/")
+app.register_blueprint(user, url_prefix="/dashboard")
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')

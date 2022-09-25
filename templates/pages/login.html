@@ -63,7 +63,7 @@
                     <p class="text-center small">Ingresa tu correo y contraseña para iniciar sesión</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form action="/login" method="POST" class="row g-3 needs-validation" novalidate>
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Correo electrónico</label>
@@ -87,7 +87,7 @@
                       </div>
                     </div>
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Ingresar</button>
+                      <button name="btnLogin" class="btn btn-primary w-100" type="submit">Ingresar</button>
                     </div>
                     <div class="col-12">
                         <p class="small mb-0">¿No tienes una cuenta?<a href="{{ url_for('home_bp.register') }}"> Crear una cuenta</a></p>
