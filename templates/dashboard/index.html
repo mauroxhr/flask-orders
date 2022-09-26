@@ -9,7 +9,7 @@
             <div class="card-body col">
               <h5 class="card-title">Crear producto </h5>
               <p class="card-text">¿Quieres crear un producto en el sistema?, sólo haz clic en el botón.</p>
-              <p class="card-text"><a href="#" class="btn btn-primary">Crear</a></p>
+              <p class="card-text"><a href="{{ url_for('user_bp.crearProducto') }}" class="btn btn-primary">Crear</a></p>
             </div>
           </div><!-- End Card with titles, buttons, and links -->
 
@@ -21,11 +21,10 @@
             <div class="card-body">
               <h5 class="card-title">Ver productos</h5>
               <p class="card-text">¿Quieres ver todos los productos?, sólo haz clic en el botón.</p>
-              <p class="card-text"><a href="#" class="btn btn-primary">Ver</a></p>
+              <p class="card-text"><a href="{{ url_for('user_bp.crearPedido') }}" class="btn btn-primary">Ver</a></p>
             </div>
           </div><!-- End Card with titles, buttons, and links -->
           </div>
           </div>
 
 {% endblock %}
-

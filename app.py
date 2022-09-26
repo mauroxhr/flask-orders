@@ -3,6 +3,7 @@ from flask_login import LoginManager
 from models import db, Usuario
 from views.home import home
 from views.user import user
+from views.api import api
 
 
 # Config
@@ -27,6 +28,7 @@ def user_loader(user_id):
 # Blueprints
 app.register_blueprint(home, url_prefix="/")
 app.register_blueprint(user, url_prefix="/dashboard")
+app.register_blueprint(api, url_prefix="/")
 
 
 # Error handlers

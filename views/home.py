@@ -1,5 +1,5 @@
 from datetime import timedelta
-from flask import Blueprint, redirect, render_template, request, url_for
+from flask import Blueprint, redirect, render_template, request, url_for, jsonify
 from flask_login import login_user, logout_user, login_required, current_user
 from models import Producto, Usuario
 from bcrypt import gensalt
@@ -87,31 +87,3 @@ def register():
 def contact():
     return "<h1>Contact </h1>"
 
-@home.route("/products/", methods=["GET", "POST"])
-def products():
-    if request.method == "GET":
-        listadoProductos = Producto.select().dicts()
-        return render_template('crearProducto.html', listadoProductos=listadoProductos)
-    elif request.method == "POST":
-        codigo = request.form.get("codigo")
-        nombre = request.form.get("nombre")
-        precio = request.form.get("precio")
-
-        if codigo and nombre and precio:
-            if Producto.select().where(Producto.codigo == codigo):
-                return 'Ya existe'
-            else:
-                Producto.create(codigo=codigo, nombre=nombre, precio=precio)
-        return f'producto creado exitosamente {codigo} {nombre} {precio}'
-
-
-
-@home.route("/products/<id>", methods=["GET", "POST"])
-def products_get(id: int):
-    listadoProductos = Producto.select().where(Producto.id == id)
-    return render_template('base.html', listadoProductos=listadoProductos)
-
-@home.route("/products/update", methods=["GET", "POST"])
-def update():
-    listadoProductos = Producto.select().dicts()
-    return render_template('base.html', listadoProductos=listadoProductos)
