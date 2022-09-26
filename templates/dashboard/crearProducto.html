@@ -1,0 +1,25 @@
+{% extends "dashboard/base.html" %} 
+{% block title %} Tablero {% endblock %}
+{% block content %} 
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Producto</h5>
+
+      <!-- No Labels Form -->
+      <form action="/dashboard/crearproducto" method="POST" class="row g-3">
+        <div class="col-md-12">
+          <input type="text" name="nombre" class="form-control" placeholder="Nombre del producto">
+        </div>
+        <div class="col-md-6">
+          <input type="text" name="codigo" class="form-control" placeholder="Codigo">
+        </div>
+        <div class="col-md-6">
+          <input type="text" name="precio" class="form-control" placeholder="Precio del Producto">
+        </div>
+          <button type="submit" class="btn btn-primary">Crear</button>
+        </div>
+      </form>
+    </div>
+</div>
+{% endblock %}
+

@@ -40,12 +40,12 @@ def migrate(migrator: Migrator, database, fake=False, **kwargs):
     @migrator.create_model
     class Usuario(pw.Model):
         id = pw.UUIDField(primary_key=True)
-        identificacion = pw.CharField(max_length=20)
+        identificacion = pw.CharField(max_length=20, unique=True)
         nombre = pw.CharField(max_length=255)
         correo = pw.CharField(max_length=255, unique=True)
         contraseña = pw.CharField(max_length=255)
-        direccion = pw.CharField(max_length=255)
-        telefono = pw.IntegerField()
+        direccion = pw.CharField(max_length=255, null=True)
+        telefono = pw.IntegerField(null=True)
         rol = pw.CharField(constraints=[SQL("DEFAULT 'USUARIO'")], default='USUARIO', max_length=255)
 
         class Meta:

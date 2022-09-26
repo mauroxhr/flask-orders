@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import logout_user, login_required
-from models import Producto
+from models import Producto, Pedido
 
 
 user = Blueprint("user_bp", __name__)
@@ -15,9 +15,25 @@ def index():
 def profile():
     return render_template('dashboard/profile.html')
 
-@user.route("/crearproducto")
+@user.route("/crearproducto", methods=["GET", "POST"])
 @login_required
 def crearProducto():
+    if request.method == "GET":
+     return render_template('dashboard/crearProducto.html')
+
+    if request.method == "POST":
+        nombre = request.form.get('nombre')
+        codigo = request.form.get('codigo')
+        precio = request.form.get('precio')
+
+        if nombre and codigo and precio:
+            try:
+                if Producto.select().where(Producto.codigo == codigo):
+                    return "Ya existe el producto"
+                nuevoProducto = Producto.create(nombre=nombre, codigo=codigo, precio=precio)
+                nuevoProducto.save()
+            except Exception as e:
+                return f"No se pudo crear el producto {e}"
     return render_template('dashboard/crearProducto.html')
 
 
@@ -30,13 +46,14 @@ def verProducto():
 @user.route("/crearpedido")
 @login_required
 def crearPedido():
-    return render_template('dashboard/crearProducto.html')
+    return render_template('dashboard/crearPedido.html')
 
 
-@user.route("/verpedido")
+@user.route("/verpedidos")
 @login_required
 def verPedido():
-    return render_template('dashboard/crearProducto.html')
+    listadoPedidos = Pedido.select().dicts()
+    return render_template('dashboard/verPedido.html', pedidos=listadoPedidos)
 
 @user.route("/faq")
 @login_required
