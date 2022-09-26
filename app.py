@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_login import LoginManager
 from models import db, Usuario
 from views.home import home
@@ -27,6 +27,12 @@ def user_loader(user_id):
 # Blueprints
 app.register_blueprint(home, url_prefix="/")
 app.register_blueprint(user, url_prefix="/dashboard")
+
+
+# Error handlers
+@app.errorhandler(404)
+def not_found(e):
+  return render_template("404.html")
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
