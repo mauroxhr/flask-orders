@@ -15,6 +15,12 @@ def index():
 def profile():
     return render_template('dashboard/profile.html')
 
+
+@user.route("/test")
+@login_required
+def test():
+    return render_template('dashboard/base.html')
+
 @user.route("/logout")
 @login_required
 def logout():

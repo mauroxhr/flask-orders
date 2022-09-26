@@ -1,6 +1,6 @@
 from datetime import timedelta
 from flask import Blueprint, redirect, render_template, request, url_for
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from models import Producto, Usuario
 from bcrypt import gensalt
 from bcrypt import hashpw as encriptar_password
@@ -20,7 +20,10 @@ def about():
 @home.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
-     return render_template('pages/login.html')
+        if current_user.is_active:
+            return redirect(url_for(('user_bp.index')))
+        else:
+            return render_template('pages/login.html')
 
     if request.method == "POST":
         username = request.form.get('username')
@@ -51,7 +54,10 @@ def login():
 @home.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "GET":
-        return render_template('pages/register.html')
+        if current_user.is_active:
+            return redirect(url_for(('user_bp.index')))
+        else:
+            return render_template('pages/register.html')
 
     if request.method == "POST":
         if 'btnRegister' in request.form:
@@ -68,7 +74,7 @@ def register():
                         return "El usuario ya existe"
                     nuevoUsuario = Usuario.create(nombre=name, correo=correo, identificacion=identificacion[:10], contraseña=cifrar_password)
                     login_user(nuevoUsuario)
-                    return redirect(url_for('home_bp.index'))
+                    return redirect(url_for('user_bp.index'))
                 except Exception as e:
                     return f"No se puede crear el usuario {e}"
             else:
