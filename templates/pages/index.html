@@ -13,7 +13,8 @@
   <!-- Favicons -->
   <!-- <link href="{{ url_for('static', filename='index/') }}assets/img/favicon.png" rel="icon"> -->
   <!-- <link href="{{ url_for('static', filename='index/') }}assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
-    <link rel="shortcut icon" href="https://cdn.unimagdalena.edu.co/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://cdn.unimagdalena.edu.co/images/favicon.ico" type="image/x-icon">
+
     <link rel="icon" href="https://cdn.unimagdalena.edu.co/images/favicon.ico" type="image/x-icon">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -39,7 +40,7 @@
 
       <a href="#" class="logo d-flex align-items-center">
         <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Feventos.unimagdalena.edu.co%2FContent%2FImagenes%2Fpatrocinadores%2Fp20190320164716.744.jpg&f=1&nofb=1&ipt=465de5c89fa719b4054c1aad8718a37eba616370d30db4b7e439197bcc3e57b5&ipo=images" alt="">
-        <span>Universidad del Magdalena</span>
+        <span>CIDS</span>
       </a>
 
       <nav id="navbar" class="navbar">
@@ -48,13 +49,7 @@
           <li><a class="nav-link scrollto" href="#about">Acerca de</a></li>
           <li><a class="nav-link scrollto" href="#team">Equipo</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contactos</a></li>
-          {% if current_user.is_active %}
-          <li><a class="getstarted scrollto" href="{{ url_for('user_bp.index') }}">Tablero</a></li>
-          <li><a class="getstarted scrollto" href="{{ url_for('user_bp.logout') }}">Cerrar sesión</a></li>
-          {% else %}
           <li><a class="getstarted scrollto" href="{{ url_for('home_bp.login') }}">Ingresar</a></li>
-          {% endif %}
-
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -73,7 +68,7 @@
           <div data-aos="fade-up" data-aos-delay="600">
             <div class="text-center text-lg-start">
               <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-                <span>Empezar</span>
+                <span>Me interesa</span>
                 <i class="bi bi-arrow-right"></i>
               </a>
             </div>
@@ -96,15 +91,13 @@
 
           <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <div class="content">
-              <h3>Who We Are</h3>
-              <h2>Expedita voluptas omnis cupiditate totam eveniet nobis sint iste. Dolores est repellat corrupti reprehenderit.</h2>
+              <h3>Intentalo ya!</h3>
+              <h2>Sistema de pedidos.</h2>
               <p>
-                Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
+               Este nuevo sistema desarrollado con Tecnología python apoyada del microframework Flask permite a la usuario registrarse, acceder, crear producto, registrar pedidos y consultar los pedidos.
               </p>
               <div class="text-center text-lg-start">
-                <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
-                  <span>Read More</span>
-                  <i class="bi bi-arrow-right"></i>
+                <a <li><a class="getstarted scrollto" href="{{ url_for('home_bp.login') }}">Intentar</a></li>
                 </a>
               </div>
             </div>
@@ -134,10 +127,10 @@
               <div class="member-img">
                 <img src="{{ url_for('static', filename='index/') }}assets/img/team/team-1.png" class="img-fluid" alt="" width="400">
                 <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                  <a href="https://twitter.com/xhlar"><i class="bi bi-twitter"></i></a>
+                  <a href="https://www.facebook.com/mauriciomartinezxh"><i class="bi bi-facebook"></i></a>
+                  <a href="https://www.instagram.com/xhlar/"><i class="bi bi-instagram"></i></a>
+                  <a href="https://github.com/xhlar"><i class="bi bi-github"></i></a>
                 </div>
               </div>
               <div class="member-info">
@@ -147,16 +140,15 @@
               </div>
             </div>
           </div>
-
           <div class="col-lg-6 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
             <div class="member">
               <div class="member-img">
                 <img src="{{ url_for('static', filename='index/') }}assets/img/team/team-2.png" class="img-fluid" alt="" width="265">
                 <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                  <a href="https://twitter.com/Manu_101110"><i class="bi bi-twitter"></i></a>
+                  <a href="https://www.facebook.com/ManuelOrtegaEJ/"><i class="bi bi-facebook"></i></a>
+                  <a href="https://www.instagram.com/manuelortegajuvinao/"><i class="bi bi-instagram"></i></a>
+                  <a href="https://github.com/Manuelortegaj11"><i class="bi bi-github"></i></a>
                 </div>
               </div>
               <div class="member-info">
@@ -166,7 +158,6 @@
               </div>
             </div>
           </div>
-
 
         </div>
 
@@ -306,7 +297,7 @@
 
           <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
             <h4>INFORMACIÓN DE CONTACTO</h4>
-            <p>
+            <p>¨
               Carrera 32 #22-08,<br> Santa Marta, Magdalena<br> Colombia <br>
               <strong>Teléfono</strong> (605) 4381000<br>
               <strong>Correo:ciudadano@unimagdalena.edu.co</strong><br>
