@@ -49,7 +49,12 @@
           <li><a class="nav-link scrollto" href="#about">Acerca de</a></li>
           <li><a class="nav-link scrollto" href="#team">Equipo</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contactos</a></li>
+          {% if current_user.is_active %}
+          <li><a class="getstarted scrollto" href="{{ url_for('user_bp.index') }}">Tablero</a></li>
+          <li><a class="getstarted scrollto" href="{{ url_for('user_bp.logout') }}">Cerrar sesión</a></li>
+          {% else %}
           <li><a class="getstarted scrollto" href="{{ url_for('home_bp.login') }}">Ingresar</a></li>
+          {% endif %}
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
