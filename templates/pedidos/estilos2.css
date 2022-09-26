@@ -1,0 +1,128 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+  
+  
+body {
+    font-family: arial;
+}
+
+
+header {
+    font-family: arial;
+    background-color: rgb(26,20,66);
+    width: 100%;
+    clear: both;
+    content: '';
+    display: table;
+    color: white;
+    text-shadow: none;
+    
+}
+
+.labelU{
+    margin-left: 25px;
+    font-weight: 700;
+
+}
+
+nav ul li {
+    list-style: none;
+    margin-left: 75px;
+    padding: 25px 0;
+    float: left;
+    
+}
+
+.Sistem{
+    float: left;
+
+}
+ 
+
+ .form-Super{
+    
+    border: 2px solid black;
+    width: 480px;
+    height: 580px;
+    background-color:rgb(255, 255, 255);
+    padding: 30px;
+    margin: 25px auto;
+    margin-top: 100px;
+    border-radius: 4px;
+    font-family: 'calibri';
+    box-shadow: 10px 7px 10px rgb(0, 0, 0);
+    border-top: 4px solid #363636 ;
+ }
+
+ .img{
+    
+    width: 100px;
+    margin: 0px;
+ }
+
+ .btn-green{
+    background-color: rgb(50, 194, 14);
+    color: white;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 0;
+    letter-spacing: 0.5px;
+    font-weight: bold;
+    border-color: rgb(40, 155, 12);
+
+} 
+
+.btn-green:hover{
+    background-color: transparent;
+    border-radius: 4px solid rgb(40, 155, 12);
+    color: rgb(50, 194, 14);
+}
+
+
+.controlsC{
+    margin-left: 180px; 
+}
+/* .form-control
+{
+    
+} */
+.btn-green
+{
+margin-left:155px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+
+    
+    
+    
