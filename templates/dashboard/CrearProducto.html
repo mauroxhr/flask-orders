@@ -1,0 +1,26 @@
+{% extends "dashboard/base.html" %} 
+{% block title %} Tablero {% endblock %}
+{% block content %} 
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Producto</h5>
+
+      <!-- No Labels Form -->
+      <form class="row g-3">
+        <div class="col-md-12">
+          <input type="text" class="form-control" placeholder="Nombre Completo">
+        </div>
+        <div class="col-md-6">
+          <input type="text" class="form-control" placeholder="ID">
+        </div>
+        <div class="col-md-6">
+          <input type="text" class="form-control" placeholder="Precio del Producto">
+        </div>
+          <button type="submit" class="btn btn-primary">Crear</button>
+          <button type="reset" class="btn btn-secondary">Eliminar</button>
+        </div>
+      </form>
+    </div>
+</div>
+{% endblock %}
+
