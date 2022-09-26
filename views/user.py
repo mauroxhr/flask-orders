@@ -30,7 +30,7 @@ def verProducto():
 @user.route("/crearpedido")
 @login_required
 def crearPedido():
-    return render_template('dashboard/crearProducto.html')
+    return render_template('dashboard/crearPedido.html')
 
 
 @user.route("/verpedido")
