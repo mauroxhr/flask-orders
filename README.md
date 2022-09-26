@@ -8,3 +8,8 @@ pw_migrate migrate --database "sqlite:///db.sqlite3"
 
 # step three
 python app.py
+
+
+---
+
+You can test this project in [xhlar](https://api.xhlar.com)
