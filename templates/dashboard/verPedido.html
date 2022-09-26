@@ -1,0 +1,55 @@
+{% extends "dashboard/base.html" %} 
+{% block title %} Tablero {% endblock %}
+{% block content %} 
+
+<div class="row align-items-top">
+<div class="col-lg-12">
+
+  <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Todos los productos</h5>
+
+              <!-- Table with hoverable rows -->
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for pedido in pedidos %}
+
+                  <tr>
+                      <th scope="row">{{ pedido.orden_id }}</th>
+                    <td>{{ pedido.cliente_id }}</td>
+                    <td>{{ pedido.producto_id }}</td>
+                    <td>{{ pedido.cantidad }}</td>
+                  </tr>
+                    {% endfor%}
+                </tbody>
+              </table>
+              <!-- End Table with hoverable rows -->
+
+            </div>
+          </div>
+
+        </div>
+
+
+<div class="col-lg-12">
+ <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Ver productos</h5>
+              <p class="card-text">¿Quieres ver todos los productos?, sólo haz clic en el botón.</p>
+              <p class="card-text"><a href="#" class="btn btn-primary">Ver</a></p>
+            </div>
+          </div><!-- End Card with titles, buttons, and links -->
+          </div>
+          </div>
+
+{% endblock %}
+

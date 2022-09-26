@@ -6,18 +6,17 @@
       <h5 class="card-title">Producto</h5>
 
       <!-- No Labels Form -->
-      <form class="row g-3">
+      <form action="/dashboard/crearproducto" method="POST" class="row g-3">
         <div class="col-md-12">
-          <input type="text" class="form-control" placeholder="Nombre Completo">
+          <input type="text" name="nombre" class="form-control" placeholder="Nombre del producto">
         </div>
         <div class="col-md-6">
-          <input type="text" class="form-control" placeholder="ID">
+          <input type="text" name="codigo" class="form-control" placeholder="Codigo">
         </div>
         <div class="col-md-6">
-          <input type="text" class="form-control" placeholder="Precio del Producto">
+          <input type="text" name="precio" class="form-control" placeholder="Precio del Producto">
         </div>
           <button type="submit" class="btn btn-primary">Crear</button>
-          <button type="reset" class="btn btn-secondary">Eliminar</button>
         </div>
       </form>
     </div>
