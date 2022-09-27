@@ -36,6 +36,17 @@ app.register_blueprint(api, url_prefix="/")
 def not_found(e):
   return render_template("404.html")
 
+# Error handlers
+@app.errorhandler(401)
+def not_authorized(e):
+  return render_template("401.html")
+
+# Error handlers
+@app.errorhandler(502)
+def not_work(e):
+  return render_template("502.html")
+
+
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')
+    app.run(host='0.0.0.0')
 

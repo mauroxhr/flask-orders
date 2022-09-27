@@ -1,5 +1,5 @@
 {% extends "dashboard/base.html" %} 
-{% block title %} Tablero {% endblock %}
+{% block title %} Tablero - Universidad del Magdalena{% endblock %}
 {% block content %} 
 
 <div class="row align-items-top">
@@ -21,7 +21,33 @@
             <div class="card-body">
               <h5 class="card-title">Ver productos</h5>
               <p class="card-text">¿Quieres ver todos los productos?, sólo haz clic en el botón.</p>
-              <p class="card-text"><a href="{{ url_for('user_bp.crearPedido') }}" class="btn btn-primary">Ver</a></p>
+              <p class="card-text"><a href="{{ url_for('user_bp.verProducto') }}" class="btn btn-primary">Ver</a></p>
+            </div>
+          </div><!-- End Card with titles, buttons, and links -->
+          </div>
+          </div>
+
+
+<div class="row align-items-top">
+<div class="col-lg-6">
+
+ <div class="card">
+            <div class="card-body col">
+              <h5 class="card-title">Crear pedido </h5>
+              <p class="card-text">¿Quieres crear un pedido en el sistema?, sólo haz clic en el botón.</p>
+              <p class="card-text"><a href="{{ url_for('user_bp.crearPedido') }}" class="btn btn-primary">Crear</a></p>
+            </div>
+          </div><!-- End Card with titles, buttons, and links -->
+
+        </div>
+
+
+<div class="col-lg-6">
+ <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Ver pedidos</h5>
+              <p class="card-text">¿Quieres ver todos los productos?, sólo haz clic en el botón.</p>
+              <p class="card-text"><a href="{{ url_for('user_bp.verPedido') }}" class="btn btn-primary">Ver</a></p>
             </div>
           </div><!-- End Card with titles, buttons, and links -->
           </div>

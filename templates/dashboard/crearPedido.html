@@ -1,9 +1,9 @@
 {% extends "dashboard/base.html" %} 
-{% block title %} Tablero {% endblock %}
+{% block title %} Crear pedido - Universidad del Magdalena {% endblock %}
 {% block content %} 
 <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Product</h5>
+      <h5 class="card-title">Pedidos</h5>
 
       <!-- No Labels Form -->
       <form class="row g-3">
@@ -18,15 +18,17 @@
         </div>
         <div class="col-md-6">
           <select id="inputState" class="form-select">
-            <option selected>Producto..</option>
-            <option>...</option>
+            <option selected>Elegir producto</option>
+            {% for producto in productos %}
+                <option>{{ producto.nombre }}</option>
+            {% endfor %}
           </select>
         </div>
         <div class="col-md-6">
             <input type="text" class="form-control" placeholder="Dirección">
           </div>
           <div class="col-md-6">
-            <input class="form-control" type="telefono" name="inputTelefono" id="inputTelefono" placeholder="+xx-xxx-xxx-xxx" pattern="[+][0-9]{2}-[0-9]{3}-[0-9]{3}-[0-9]{4}" title="+xx-xxx-xxx-xxx" value="+57">
+            <input class="form-control" type="telefono" name="inputTelefono" id="inputTelefono" placeholder="+xx-xxx-xxx-xxx" pattern="[+][0-9]{2}-[0-9]{3}-[0-9]{3}-[0-9]{4}" title="+xx-xxx-xxx-xxx" value="">
           </div>
 
           <button type="submit" class="btn btn-primary">Crear</button>
@@ -35,4 +37,16 @@
       </form>
     </div>
 </div>
+
+<div class="col-lg-12">
+ <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Ver pedidos</h5>
+              <p class="card-text">¿Quieres ver todos los pedidos?, sólo haz clic en el botón.</p>
+              <p class="card-text"><a href="{{ url_for('user_bp.verPedido') }}" class="btn btn-primary">Ver</a></p>
+            </div>
+          </div><!-- End Card with titles, buttons, and links -->
+          </div>
+          </div>
+
 {% endblock %} 
