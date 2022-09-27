@@ -1,5 +1,5 @@
 {% extends "dashboard/base.html" %} 
-{% block title %} Tablero {% endblock %}
+{% block title %} Todos los productos - Universidad del Magdalena {% endblock %}
 {% block content %} 
 
 <div class="row align-items-top">
@@ -39,16 +39,13 @@
         </div>
 
 
-<div class="col-lg-12">
  <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Ver productos</h5>
-              <p class="card-text">¿Quieres ver todos los productos?, sólo haz clic en el botón.</p>
-              <p class="card-text"><a href="#" class="btn btn-primary">Ver</a></p>
+            <div class="card-body col">
+              <h5 class="card-title">Crear producto </h5>
+              <p class="card-text">¿Quieres crear un producto en el sistema?, sólo haz clic en el botón.</p>
+              <p class="card-text"><a href="{{ url_for('user_bp.crearProducto') }}" class="btn btn-primary">Crear</a></p>
             </div>
           </div><!-- End Card with titles, buttons, and links -->
-          </div>
-          </div>
 
 {% endblock %}
 

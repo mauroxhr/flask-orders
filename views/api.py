@@ -29,7 +29,7 @@ def products():
 
 
 
-@api.route("/products/<id>", methods=["GET", "POST"])
+@api.route("/products/<int:id>", methods=["GET", "POST"])
 def products_get(id: int):
     producto = Producto.get(Producto.id == id)
     # return f'PRODUCTO: {producto.codigo} {producto.nombre} {producto.precio}'

@@ -46,13 +46,15 @@ def verProducto():
 @user.route("/crearpedido")
 @login_required
 def crearPedido():
-    return render_template('dashboard/crearPedido.html')
+    listadoProductos = Producto.select().dicts()
+    return render_template('dashboard/crearPedido.html', productos=listadoProductos)
 
 
 @user.route("/verpedidos")
 @login_required
 def verPedido():
     listadoPedidos = Pedido.select().dicts()
+    breakpoint()
     return render_template('dashboard/verPedido.html', pedidos=listadoPedidos)
 
 @user.route("/faq")
