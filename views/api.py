@@ -5,6 +5,7 @@ from models import Producto
 api = Blueprint("api_bp", __name__)
 
 @api.route("/products/", methods=["GET", "POST"])
+@api.route("/products", methods=["GET", "POST"])
 def products():
     if request.method == "GET":
         listadoProductos = Producto.select().dicts()
