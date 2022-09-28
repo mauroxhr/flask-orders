@@ -36,7 +36,7 @@ class Pedido(db.Model):
     id = IntegerField(primary_key=True)
     orden_id = UUIDField(default=uuid4)
     cliente = ForeignKeyField(Usuario, backref="usuario_pedido")
-    producto = ForeignKeyField(Producto, backref="producto_pedido")
+    producto = ForeignKeyField(Producto, backref="producto_pedido", on_delete='cascade')
     cantidad = IntegerField()
     # productos = ArrayField(TextField)
 

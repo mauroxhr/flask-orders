@@ -1,4 +1,4 @@
-"""Peewee migrations -- 003_implement_limitaciones.py.
+"""Peewee migrations -- 001_pedido_en_cascada.py.
 
 Some examples (model - class or model name)::
 
@@ -38,6 +38,20 @@ def migrate(migrator: Migrator, database, fake=False, **kwargs):
     """Write your migrations here."""
 
     @migrator.create_model
+    class Usuario(pw.Model):
+        id = pw.UUIDField(primary_key=True)
+        identificacion = pw.CharField(max_length=20, unique=True)
+        nombre = pw.CharField(max_length=255)
+        correo = pw.CharField(max_length=255, unique=True)
+        contraseña = pw.CharField(max_length=255)
+        direccion = pw.CharField(max_length=255, null=True)
+        telefono = pw.IntegerField(null=True)
+        rol = pw.CharField(constraints=[SQL("DEFAULT 'USUARIO'")], default='USUARIO', max_length=255)
+
+        class Meta:
+            table_name = "usuario"
+
+    @migrator.create_model
     class Limitaciones(pw.Model):
         id = pw.AutoField()
         usuario = pw.ForeignKeyField(backref='usuario_limitaciones', column_name='usuario_id', field='id', model=migrator.orm['usuario'])
@@ -47,9 +61,36 @@ def migrate(migrator: Migrator, database, fake=False, **kwargs):
         class Meta:
             table_name = "limitaciones"
 
+    @migrator.create_model
+    class Producto(pw.Model):
+        id = pw.AutoField()
+        codigo = pw.CharField(max_length=8)
+        nombre = pw.CharField(max_length=20)
+        precio = pw.IntegerField()
+
+        class Meta:
+            table_name = "producto"
+
+    @migrator.create_model
+    class Pedido(pw.Model):
+        id = pw.IntegerField(primary_key=True)
+        orden_id = pw.UUIDField()
+        cliente = pw.ForeignKeyField(backref='usuario_pedido', column_name='cliente_id', field='id', model=migrator.orm['usuario'])
+        producto = pw.ForeignKeyField(backref='producto_pedido', column_name='producto_id', field='id', model=migrator.orm['producto'], on_delete='cascade')
+        cantidad = pw.IntegerField()
+
+        class Meta:
+            table_name = "pedido"
+
 
 
 def rollback(migrator: Migrator, database, fake=False, **kwargs):
     """Write your rollback migrations here."""
 
+    migrator.remove_model('pedido')
+
+    migrator.remove_model('producto')
+
     migrator.remove_model('limitaciones')
+
+    migrator.remove_model('usuario')
