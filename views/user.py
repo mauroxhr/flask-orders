@@ -28,6 +28,7 @@ def crearProducto():
 
         if nombre and codigo and precio:
             try:
+                precio = int(precio)
                 if Producto.select().where(Producto.codigo == codigo):
                     return "Ya existe el producto"
                 nuevoProducto = Producto.create(nombre=nombre, codigo=codigo, precio=precio)
@@ -54,7 +55,6 @@ def crearPedido():
 @login_required
 def verPedido():
     listadoPedidos = Pedido.select().dicts()
-    breakpoint()
     return render_template('dashboard/verPedido.html', pedidos=listadoPedidos)
 
 @user.route("/faq")
