@@ -38,7 +38,7 @@
     <script charset="utf-8">
         
   
-var seconds =15;
+var seconds =10;
 // countdown timer. took 6 because page takes approx 1 sec to load
   
 var url="{{url_for('home_bp.index')}}";
@@ -67,7 +67,7 @@ function redirect(){
       <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
         <h1>404 </h1>
         <h2>Al parecer la página que estás buscando no existe.</h2>
-        <h2 id="pageInfo"></h2>
+        <h5 id="pageInfo"></h5>
         <a class="btn" href="javascript:history.back()"">Volver atrás </a>
         <img src="{{ url_for('static', filename="") }}assets/img/not-found.svg" class="img-fluid py-5" alt="Page Not Found">
         <div class="credits">

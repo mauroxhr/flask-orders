@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask_login import LoginManager
 from models import db, Usuario
 from views.home import home
-from views.user import user
+from views.user import user, admin
 from views.api import api
 
 
@@ -28,6 +28,7 @@ def user_loader(user_id):
 # Blueprints
 app.register_blueprint(home, url_prefix="/")
 app.register_blueprint(user, url_prefix="/dashboard")
+app.register_blueprint(admin, url_prefix="/dashboard")
 app.register_blueprint(api, url_prefix="/")
 
 
@@ -45,6 +46,12 @@ def not_authorized(e):
 @app.errorhandler(502)
 def not_work(e):
   return render_template("502.html")
+
+
+# Error handlers
+@app.errorhandler(500)
+def not_work(e):
+  return render_template("500.html")
 
 
 if __name__ == "__main__":

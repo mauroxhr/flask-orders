@@ -6,27 +6,30 @@
       <h5 class="card-title">Pedidos</h5>
 
       <!-- No Labels Form -->
-      <form class="row g-3">
-        <div class="col-md-6">
-          <input type="text" class="form-control" placeholder="Nombre Completo">
+      <form action="" method="GET" class="row g-3">
+        {% if productos %}
+        <div class="col-md-12">
+            <input name="cliente" type="text" class="form-control" placeholder="ID Cliente" value="{{ current_user.id }}">
         </div>
-        <div class="col-md-6">
-            <input type="text" class="form-control" placeholder="ID Cliente" value="{{ current_user.id }}">
+        {% else %}
+        <div class="col-md-12">
+            <input name="cliente" type="text" class="form-control" placeholder="ID Cliente">
         </div>
-        <div class="col-md-6">
-          <input type="number" class="form-control" placeholder="Cantidad Producto">
-        </div>
-        <div class="col-md-6">
-          <select id="inputState" class="form-select">
-            {% if produtos %}
+        {% endif %}
+        <div class="col-md-12">
+          <select name="producto" id="inputState" class="form-select">
+            {% if productos %}
             <option selected>Elegir producto</option>
             {% for producto in productos %}
-                <option>{{ producto.nombre }}</option>
+                <option value="{{ producto.id }}">{{ producto.nombre }}</option>
             {% endfor %}
             {% else %}
             <option selected>No hay productos en el sistema </option>
             {% endif %}
           </select>
+        </div>
+        <div class="col-md-12">
+          <input name="cantidad" type="number" class="form-control" placeholder="Cantidad a pedir">
         </div>
         <!-- <div class="col-md-6"> -->
         <!--     <input type="text" class="form-control" placeholder="Dirección"> -->
@@ -34,13 +37,18 @@
           <!-- <div class="col-md-6"> -->
           <!--   <input class="form-control" type="telefono" name="inputTelefono" id="inputTelefono" placeholder="+xx-xxx-xxx-xxx" pattern="[+][0-9]{2}-[0-9]{3}-[0-9]{3}-[0-9]{4}" title="+xx-xxx-xxx-xxx" value=""> -->
           <!-- </div> -->
-
-          <button type="submit" class="btn btn-primary">Crear pedido</button>
+          {% if productos %}
+            <button type="submit" class="btn btn-primary">Crear pedido</button>
+          {% else %}
+            <p class="text-center">Deberías de crear un producto primero.</p>
+            <p class="btn btn-primary"><a href="{{ url_for('user_bp.crearProducto') }}" class="btn btn-primary">Crear producto</a></p>
+          {% endif %}
         </div>
       </form>
     </div>
 </div>
 
+{% if productos %}
 <div class="col-lg-12">
  <div class="card">
             <div class="card-body">
@@ -51,5 +59,6 @@
           </div><!-- End Card with titles, buttons, and links -->
           </div>
           </div>
+{% endif %}
 
 {% endblock %} 

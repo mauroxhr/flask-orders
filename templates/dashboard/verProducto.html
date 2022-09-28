@@ -17,6 +17,9 @@
                     <th scope="col">Codigo</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Precio</th>
+                    {% if current_user.rol == "ADMINISTRADOR"%}
+                    <th scope="col">Acciones</th>
+                    {% endif %}
                   </tr>
                 </thead>
                 <tbody>
@@ -27,6 +30,17 @@
                     <td>{{ producto.codigo }}</td>
                     <td>{{ producto.nombre }}</td>
                     <td>{{ producto.precio }}</td>
+                    {% if current_user.rol == "ADMINISTRADOR"%}
+                    <td>
+                        <div class="form-group">
+                        <form action="" method="get" accept-charset="utf-8">
+                            <input type="hidden" name="borrarproducto" value="{{ producto.id }}" />
+                        <button type="submit" class="btn btn-danger">BORRAR PRODUCTO</button>
+                        </form>
+                        </div>
+                    </td>
+                    {% endif %}
+
                   </tr>
                     {% endfor%}
                 </tbody>

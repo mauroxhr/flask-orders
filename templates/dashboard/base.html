@@ -279,14 +279,6 @@
               <i class="bi bi-circle"></i><span>Ver productos</span>
             </a>
           </li>
-      {% if current_user.rol == "ADMINISTRADOR" %}
-          <li>
-            <a href="components-accordion.html">
-              <i class="bi bi-circle"></i><span>Borrar producto</span>
-            </a>
-          </li>
-
-        {% endif %}
         </ul>
       </li><!-- End Components Nav -->
 
@@ -306,13 +298,6 @@
               <i class="bi bi-circle"></i><span>Ver pedidos</span>
             </a>
           </li>
-      {% if current_user.rol == "ADMINISTRADOR" %}
-          <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Borrar pedido</span>
-            </a>
-          </li>
-      {% endif %}
         </ul>
       </li><!-- End Forms Nav -->
 
@@ -320,9 +305,9 @@
       {% if current_user.rol == "ADMINISTRADOR" %}
       <li class="nav-heading">ADMINISTRACION</li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
+          <a class="nav-link collapsed" href="{{ url_for('admin_bp.verUsuarios') }}">
           <i class="bi bi-person"></i>
-          <span>BORRAR PRODUCTOS</span>
+          <span>VER USUARIOS</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
