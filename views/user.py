@@ -54,7 +54,7 @@ def crearPedido():
 @user.route("/verpedidos")
 @login_required
 def verPedido():
-    listadoPedidos = Pedido.select().dicts()
+    listadoPedidos = Pedido.select()
     return render_template('dashboard/verPedido.html', pedidos=listadoPedidos)
 
 @user.route("/faq")

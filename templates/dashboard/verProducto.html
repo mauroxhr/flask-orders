@@ -8,7 +8,7 @@
   <div class="card">
             <div class="card-body">
               <h5 class="card-title">Todos los productos</h5>
-
+              {% if productos %}
               <!-- Table with hoverable rows -->
               <table class="table table-hover">
                 <thead>
@@ -32,13 +32,16 @@
                 </tbody>
               </table>
               <!-- End Table with hoverable rows -->
-
+              {% else %}
+                  No hay productos en el sistema<br><br>
+              <p class="card-text"><a href="{{ url_for('user_bp.crearProducto') }}" class="btn btn-primary">Crear un producto</a></p>
+              {% endif %}
             </div>
           </div>
 
         </div>
 
-
+        {% if productos %}
  <div class="card">
             <div class="card-body col">
               <h5 class="card-title">Crear producto </h5>
@@ -46,6 +49,7 @@
               <p class="card-text"><a href="{{ url_for('user_bp.crearProducto') }}" class="btn btn-primary">Crear</a></p>
             </div>
           </div><!-- End Card with titles, buttons, and links -->
+          {% endif %}
 
 {% endblock %}
 

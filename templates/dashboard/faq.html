@@ -36,11 +36,12 @@
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="flush-headingThree">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseTwo">
-                        API 
+                        ¿Cómo utilizar la API del sistema?
                     </button>
                   </h2>
                   <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">Las siguientes rutas se utilizan con el método GET en el siguiente endpoint: <code>products/</code> que retorna todos los productos en formato JSON<br><br>la siguiente ruta se utiliza con el método GET en el siguiente endpoint: <code>products/id: int</code> que retorna sólo un producto en formato JSON</div>
+                      <div class="accordion-body">Las siguientes rutas se utilizan con el método GET en el siguiente endpoint: <code><a href="{{ url_for('api_bp.get_all_products') }}" target="_blank">products/ </a></code> que retorna todos los productos en formato JSON<br><br>la siguiente ruta se utiliza con el método GET en el siguiente endpoint: <code><a href="{{ url_for('api_bp.get_product', id="1") }}" target="_blank">products/id </a></code> que retorna sólo un producto en formato JSON</div>
+                      <div class="accordion-body">Las siguientes rutas se utilizan con el método GET en el siguiente endpoint: <code><a href="{{ url_for('api_bp.get_all_orders') }}" target="_blank">orders/ </a></code> que retorna todos los pedidos en formato JSON<br><br>la siguiente ruta se utiliza con el método GET en el siguiente endpoint: <code><a href="{{ url_for('api_bp.get_order', id="1") }}" target="_blank">orders/id</a></code> que retorna sólo un pedido en formato JSON</div>
                   </div>
                 </div>
 
