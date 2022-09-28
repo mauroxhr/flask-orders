@@ -49,6 +49,8 @@ def verProducto():
             if "borrarproducto" in form:
                 producto = Producto.get(Producto.id == form["borrarproducto"])
                 producto.delete_instance()
+                pedido = Pedido.delete().where(Pedido.producto_id == form["borrarproducto"])
+                pedido.execute()
     return render_template('dashboard/verProducto.html', productos=listadoProductos)
 
 @user.route("/crearpedido", methods=["GET", "POST"])
@@ -61,14 +63,21 @@ def crearPedido():
             cliente = form["cliente"]
             producto = form["producto"]
             cantidad = form["cantidad"]
-            if cliente and producto != "Elegir producto" and int(cantidad) > 0:
+            if cliente and producto != "Elegir producto" and cantidad:
                 try:
                     cliente = uuid.UUID(cliente)
-                    # Si existe el producto, aumentar la cantidad 
-                    # if Pedido.select().where(Pedido.producto_id == producto):
-                    # else:
-                    nuevoPedido = Pedido.create(cliente_id=cliente, producto_id=producto, cantidad=cantidad)
-                    nuevoPedido.save()
+                    # Si existe el producto, aumentar la cantidad o restar la cantidad
+                    pedidoExists = Pedido.select().where(Pedido.producto_id == producto)
+                    if pedidoExists:
+                            queryCantidadMinima = Pedido.select().where(Pedido.producto_id == producto)
+                            cantidadMinima = queryCantidadMinima[0].cantidad
+                            cantidadMinima += int(cantidad)
+                            if cantidadMinima > 0:
+                                pedidoUpdate = Pedido.update(cantidad=cantidadMinima).where(Pedido.producto_id == producto)
+                                pedidoUpdate.execute()
+                    else:
+                        nuevoPedido = Pedido.create(cliente_id=cliente, producto_id=producto, cantidad=cantidad)
+                        nuevoPedido.save()
                 except Exception as e:
                     return f"No se pudo crear el pedido {e}"
     return render_template('dashboard/crearPedido.html', productos=listadoProductos)
