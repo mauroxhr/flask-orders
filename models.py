@@ -33,8 +33,14 @@ class Producto(db.Model):
     precio = IntegerField()
 
 class Pedido(db.Model):
-    orden_id = UUIDField(primary_key=True, default=uuid4)
+    id = IntegerField(primary_key=True)
+    orden_id = UUIDField(default=uuid4)
     cliente = ForeignKeyField(Usuario, backref="usuario_pedido")
     producto = ForeignKeyField(Producto, backref="producto_pedido")
     cantidad = IntegerField()
     # productos = ArrayField(TextField)
+
+class Limitaciones(db.Model):
+    usuario = ForeignKeyField(Usuario, backref="usuario_limitaciones")
+    productos = IntegerField()
+    pedidos = IntegerField()
