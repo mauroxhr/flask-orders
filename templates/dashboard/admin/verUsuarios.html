@@ -39,7 +39,7 @@
                             </form>
                         </td>
                         <td>
-                            {% if current_user.rol == "ADMINISTRADOR"%}
+                            {% if usuario.rol == "ADMINISTRADOR"%}
                             <form action="" method="get" accept-charset="utf-8">
                                 <input type="hidden" name="quitaradmin" value="{{ usuario.id }}" />
                             <button type="submit" class="btn btn-danger">QUITAR ADMINISTRADOR</button>

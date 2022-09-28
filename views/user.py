@@ -54,8 +54,8 @@ def verProducto():
 @user.route("/crearpedido", methods=["GET", "POST"])
 @login_required
 def crearPedido():
+    listadoProductos = Producto.select().dicts()
     if request.method == "GET":
-        listadoProductos = Producto.select().dicts()
         form = request.args
         if form:
             cliente = form["cliente"]
@@ -64,10 +64,11 @@ def crearPedido():
             if cliente and producto != "Elegir producto" and int(cantidad) > 0:
                 try:
                     cliente = uuid.UUID(cliente)
-                    cantidad = int(cantidad)
-                    if Pedido.select().where(Pedido.cliente_id == cliente):
-                        nuevoPedido = Pedido.create(cliente_id=cliente, producto_id=producto, cantidad=cantidad)
-                        nuevoPedido.save()
+                    # Si existe el producto, aumentar la cantidad 
+                    # if Pedido.select().where(Pedido.producto_id == producto):
+                    # else:
+                    nuevoPedido = Pedido.create(cliente_id=cliente, producto_id=producto, cantidad=cantidad)
+                    nuevoPedido.save()
                 except Exception as e:
                     return f"No se pudo crear el pedido {e}"
     return render_template('dashboard/crearPedido.html', productos=listadoProductos)
@@ -75,10 +76,7 @@ def crearPedido():
 @user.route("/verpedidos")
 @login_required
 def verPedido():
-    try:
-        listadoPedidos = Pedido.select()
-    except Exception as e:
-        return render_template('dashboard/verPedido.html')
+    listadoPedidos = Pedido.select()
     return render_template('dashboard/verPedido.html', pedidos=listadoPedidos)
 
 @user.route("/faq")
