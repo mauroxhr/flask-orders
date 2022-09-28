@@ -301,6 +301,12 @@
         </ul>
       </li><!-- End Forms Nav -->
 
+      <li class="nav-item">
+          <a class="nav-link collapsed" href="{{ url_for('user_bp.faq') }}">
+          <i class="bi bi-question-circle"></i>
+          <span>F.A.Q</span>
+        </a>
+      </li><!-- End F.A.Q Page Nav -->
 
       {% if current_user.rol == "ADMINISTRADOR" %}
       <li class="nav-heading">ADMINISTRACION</li>
@@ -311,13 +317,6 @@
         </a>
       </li><!-- End Profile Page Nav -->
 
-      {% else %}
-      <li class="nav-item">
-          <a class="nav-link collapsed" href="{{ url_for('user_bp.faq') }}">
-          <i class="bi bi-question-circle"></i>
-          <span>F.A.Q</span>
-        </a>
-      </li><!-- End F.A.Q Page Nav -->
       {% endif %}
 
 
