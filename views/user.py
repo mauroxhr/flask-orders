@@ -66,15 +66,24 @@ def crearPedido():
             if cliente and producto != "Elegir producto" and cantidad:
                 try:
                     cliente = uuid.UUID(cliente)
+                    query = Pedido.select().where(Pedido.cliente_id == cliente)
                     # Si existe el producto, aumentar la cantidad o restar la cantidad y es diferente del cliente id
-                    clienteExists = Pedido.select().where(Pedido.cliente_id == cliente)
-                    pedidoExists = Pedido.select().where(Pedido.producto_id == producto)
-                    if clienteExists and pedidoExists:
-                            clienteExists = Pedido.select().where(Pedido.cliente_id == cliente)
-                            cantidadMinima = clienteExists[0].cantidad
+                    idProducto = ""
+                    idCliente = ""
+                    idOrden = ""
+                    for i in query:
+                        if i.producto.id == int(producto):
+                            idOrden = i.id
+                            idCliente = i.cliente_id
+                            idProducto = i.producto_id
+
+                    if idCliente == cliente and idProducto == int(producto):
+                            # cantidadMinima = [0].cantidad
+                            queryQuantity = Pedido.select().where(Pedido.id == idOrden)
+                            cantidadMinima = queryQuantity[0].cantidad
                             cantidadMinima += int(cantidad)
                             if cantidadMinima > 0:
-                                pedidoUpdate = Pedido.update(cantidad=cantidadMinima).where(Pedido.cliente_id == cliente)
+                                pedidoUpdate = Pedido.update(cantidad=cantidadMinima).where(Pedido.id == idOrden)
                                 pedidoUpdate.execute()
                     else:
                         nuevoPedido = Pedido.create(cliente_id=cliente, producto_id=producto, cantidad=cantidad)
