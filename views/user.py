@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, flash, render_template, request, redirect, url_for
 from flask_login import current_user, logout_user, login_required
 from models import Producto, Pedido, Usuario
 import uuid
@@ -31,11 +31,13 @@ def crearProducto():
             try:
                 precio = int(precio)
                 if Producto.select().where(Producto.codigo == codigo):
-                    return "Ya existe el producto"
+                    flash("Ya existe el producto", "alert-danger bg-danger")
+                    return render_template('dashboard/crearProducto.html')
                 nuevoProducto = Producto.create(nombre=nombre, codigo=codigo, precio=precio)
                 nuevoProducto.save()
+                flash("Producto creado exitosamente", "alert-success bg-success")
             except Exception as e:
-                return f"No se pudo crear el producto {e}"
+                flash("Ya existe el producto", "alert-danger bg-danger")
     return render_template('dashboard/crearProducto.html')
 
 
@@ -80,16 +82,22 @@ def crearPedido():
                     if idCliente == cliente and idProducto == int(producto):
                             # cantidadMinima = [0].cantidad
                             queryQuantity = Pedido.select().where(Pedido.id == idOrden)
-                            cantidadMinima = queryQuantity[0].cantidad
-                            cantidadMinima += int(cantidad)
+                            productoCantidad = queryQuantity[0].cantidad
+                            cantidadMinima = productoCantidad + int(cantidad)
                             if cantidadMinima > 0:
                                 pedidoUpdate = Pedido.update(cantidad=cantidadMinima).where(Pedido.id == idOrden)
                                 pedidoUpdate.execute()
+                                flash("Pedido actualizado exitosamente.", "alert-success bg-success")
+                                flash(f"Cantidad anterior: {productoCantidad}, ahora la nueva cantidad es {cantidadMinima} ", "alert-success bg-success")
+                                return redirect(request.path,code=302)
                     else:
                         nuevoPedido = Pedido.create(cliente_id=cliente, producto_id=producto, cantidad=cantidad)
                         nuevoPedido.save()
+                        flash("Pedido creado exitosamente", "alert-success bg-success")
+                        return redirect(request.path,code=302)
                 except Exception as e:
-                    return f"No se pudo crear el pedido {e}"
+                    flash("No se pudo crear el pedido", "alert-danger bg-danger")
+                    return render_template('dashboard/crearPedido.html', productos=listadoProductos)
     return render_template('dashboard/crearPedido.html', productos=listadoProductos)
 
 @user.route("/verpedidos")
@@ -107,6 +115,7 @@ def faq():
 @login_required
 def logout():
     logout_user()
+    flash("Has cerrado sesión exitosamente", "alert-success bg-success")
     return redirect(url_for('home_bp.index'))
 
 

@@ -61,11 +61,22 @@
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
+
   <section id="hero" class="hero d-flex align-items-center">
 
     <div class="container">
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert {{ category }} text-light border-0 alert-dismissible fade show" role="alert">
+                                            {{ message }}
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+                            {% endfor %}
+                        {% endif %}
+                        {% endwith %}
           <h1 data-aos="fade-up">Sistema de pedidos</h1>
           <h2 data-aos="fade-up" data-aos-delay="400">Centro de ingeniería y Desarrollo de Software</h2>
           <div data-aos="fade-up" data-aos-delay="600">
