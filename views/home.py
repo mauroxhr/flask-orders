@@ -1,7 +1,7 @@
 from datetime import timedelta
-from flask import Blueprint, redirect, render_template, request, url_for, jsonify
-from flask_login import login_user, logout_user, login_required, current_user
-from models import Producto, Usuario
+from flask import Blueprint, redirect, render_template, request, url_for, flash
+from flask_login import login_user, current_user
+from models import Usuario
 from bcrypt import gensalt
 from bcrypt import hashpw as encriptar_password
 from bcrypt import checkpw as confirmar_password
@@ -13,9 +13,9 @@ home = Blueprint("home_bp", __name__)
 def index():
     return render_template('pages/index.html')
 
-@home.route("/about")
-def about():
-    return "<h1>About</h1>"
+@home.route("/terms-condition")
+def terms_and_condition():
+    return "<h1>Términos y condiciones</h1><p>Los datos registrados no serán compartidos con terceros</p>"
 
 @home.route("/login", methods=["GET", "POST"])
 def login():
@@ -33,9 +33,9 @@ def login():
         if username and password:
             try:
                 usuario = Usuario.get(correo=username)
-                print(usuario)
             except Exception as e:
-                return f"Error, no se pudo obtener el usuario {e}"
+                flash("No se pudo iniciar sesión", "alert-danger bg-danger")
+                return render_template('pages/login.html')
             pass_actual = usuario.contraseña
             hacen_match = confirmar_password(password.encode("utf-8"), pass_actual.encode("utf-8"))
 
@@ -46,9 +46,11 @@ def login():
                 else:
                     login_user(usuario, remember=False, duration=False)
 
+                flash("Has iniciado sesión correctamente", "alert-success bg-success")
                 return redirect(url_for('user_bp.index'))
 
-        return "Error, datos incompletos"
+        flash("No se pudo iniciar sesión", "alert-danger bg-danger")
+        return render_template('pages/login.html')
 
 
 @home.route("/register", methods=["GET", "POST"])
@@ -70,20 +72,17 @@ def register():
                 cifrar_password = encriptar_password(contraseña.encode("utf-8"), gensalt())
 
                 try:
-                    if Usuario.select().where(Usuario.identificacion == identificacion):
-                        return "El usuario ya existe"
+                    if Usuario.select().where(Usuario.identificacion == identificacion and Usuario.correo == correo):
+                        flash("El usuario ya existe", "alert-danger bg-danger")
+                        return render_template('pages/register.html')
+
                     nuevoUsuario = Usuario.create(nombre=name, correo=correo, identificacion=identificacion[:10], contraseña=cifrar_password)
                     login_user(nuevoUsuario)
+                    flash("Cuenta creada exitosamente", "alert-success bg-success")
                     return redirect(url_for('user_bp.index'))
                 except Exception as e:
-                    return f"No se puede crear el usuario {e}"
+                    flash("No se pudo crear el usuario", "alert-danger bg-danger")
+                    return render_template('pages/register.html')
             else:
-                return f"Información incompleta"
-
-            # return f"{correo} {name} {identificacion}"
-
-
-@home.route("/contact")
-def contact():
-    return "<h1>Contact </h1>"
-
+                flash("No se pudo crear el usuario", "alert-danger bg-danger")
+                return render_template('pages/register.html')

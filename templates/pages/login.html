@@ -57,7 +57,6 @@
               <div class="card mb-3">
 
                 <div class="card-body">
-
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Iniciar sesión</h5>
                     <p class="text-center small">Ingresa tu correo y contraseña para iniciar sesión</p>
@@ -89,6 +88,16 @@
                     <div class="col-12">
                       <button name="btnLogin" class="btn btn-primary w-100" type="submit">Ingresar</button>
                     </div>
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert {{ category }} text-light border-0 alert-dismissible fade show" role="alert">
+                                            {{ message }}
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+                            {% endfor %}
+                        {% endif %}
+                        {% endwith %}
                     <div class="col-12">
                         <p class="small mb-0">¿No tienes una cuenta?<a href="{{ url_for('home_bp.register') }}"> Crear una cuenta</a></p>
                     </div>
