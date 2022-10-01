@@ -38,6 +38,9 @@ def crearProducto():
                 flash("Producto creado exitosamente", "alert-success bg-success")
             except Exception as e:
                 flash("Ya existe el producto", "alert-danger bg-danger")
+        else:
+            flash("Rellena todos los campos", "alert-danger bg-danger")
+
     return render_template('dashboard/crearProducto.html')
 
 
@@ -98,6 +101,8 @@ def crearPedido():
                 except Exception as e:
                     flash("No se pudo crear el pedido", "alert-danger bg-danger")
                     return render_template('dashboard/crearPedido.html', productos=listadoProductos)
+            else:
+                flash("Rellena todos los campos", "alert-danger bg-danger")
     return render_template('dashboard/crearPedido.html', productos=listadoProductos)
 
 @user.route("/verpedidos")
